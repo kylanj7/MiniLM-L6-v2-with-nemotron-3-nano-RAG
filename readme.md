@@ -19,13 +19,13 @@ This system leverages **TinyLlama 1.1b** as the language model and **Nomic Embed
 
 ## System Requirements
 
-### Minimum Specifications
-- **Processor**: Modern dual-core CPU (Intel i5/AMD Ryzen 5 or equivalent)
-- **RAM**: 8GB (16GB recommended for larger document collections)
-- **Storage**: 5GB free space (2GB for models + 3GB for documents/vector store)
+### Minimal Requirments
+- **Processor**: Modern dual-core CPU (Intel i5 11th gen or Ryzen zen3 or higher)
+- **RAM**: 32GB (64GB recommended for larger document collections)
+- **Storage**: 256GB free space (2GB for models + extra for documents/vector store)
 - **OS**: Windows 10/11, macOS 12+, or Linux (Ubuntu 20.04+)
 
-### Software Requirements
+### Minimum Software 
 - Python 3.10 or higher
 - Ollama runtime environment
 
