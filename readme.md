@@ -4,7 +4,7 @@ A lightweight Retrieval-Augmented Generation (RAG) system designed for enterpris
 
 ## Overview
 
-This system leverages **TinyLlama 1.1b** as the language model and **Nomic Embed Text** for embeddings to deliver intelligent document retrieval and question-answering capabilities on consumer-grade hardware.
+This system leverages **TinyLlama 1.1b** as the language model and **Embedded Gemma 300m** for embeddings to deliver intelligent document retrieval and question-answering capabilities on consumer-grade hardware.
 
 ## Key Features
 
