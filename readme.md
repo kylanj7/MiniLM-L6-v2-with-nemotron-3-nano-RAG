@@ -16,6 +16,7 @@ This system leverages **TinyLlama 1.1b** as the language model and **Nomic Embed
 - **Intelligent Retrieval**: Multiprocessing-enabled PDF chunking with semantic search capabilities
 - **Confidential RAG**: Private document indexing with persistent vector storage using ChromaDB
 - **Incremental Indexing**: Only processes new or modified documents, saving time on updates
+- **Scalable**: Larger models can scale with the system's resources
 
 ## System Requirements
 
