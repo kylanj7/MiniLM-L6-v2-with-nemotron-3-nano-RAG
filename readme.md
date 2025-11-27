@@ -59,12 +59,7 @@ pip install -r requirements.txt
 
 **requirements.txt contents:**
 ```
-langchain
-langchain-ollama
-langchain-chroma
-langchain-text-splitters
-pymupdf
-chromadb
+pip install -r requirements.txt
 ```
 
 ### Step 4: Install Ollama
