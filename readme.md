@@ -38,6 +38,8 @@ This system leverages **TinyLlama 1.1b** as the language model and **Nomic Embed
 ```bash
 git clone https://github.com/kylanj7/Lightweight-Enterprise-RAG.git```
 ```
+## Change Directories
+```
 cd lightweight-rag-enterprise
 ```
 
@@ -56,11 +58,6 @@ rag_venv\Scripts\activate
 
 ### Step 3: Install Python Dependencies
 ```bash
-pip install -r requirements.txt
-```
-
-**requirements.txt contents:**
-```
 pip install -r requirements.txt
 ```
 
