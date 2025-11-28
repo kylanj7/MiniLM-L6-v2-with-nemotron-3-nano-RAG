@@ -27,8 +27,8 @@ COLLECTION_NAME = "enterprise_docs"
 TOP_K_RESULTS = 3
 
 # LLM generation settings
-MAX_TOKENS = 512
-TEMPERATURE = 0.7
+MAX_TOKENS = 2048
+TEMPERATURE = 0.49
 
 # Logging
 LOG_LEVEL = "INFO"
