@@ -439,13 +439,3 @@ Built with:
 - [PyMuPDF](https://pymupdf.readthedocs.io/) - PDF processing
 
 ---
-
-## Changelog
-
-### Version 1.0.0 (2025-01-XX)
-- Initial release
-- Incremental indexing support
-- TinyLlama 1.1b integration
-- Nomic embedding support
-- Interactive CLI interface
-- Batch processing optimization
