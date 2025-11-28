@@ -10,7 +10,7 @@ This system leverages **TinyLlama 1.1b** as the language model and **Embedded Ge
 
 - **Enterprise-Grade Security**: All data processing occurs locally—no external API calls or data transmission
 - **Executive-Ready**: Optimized for business documents, reports, and confidential materials
-- **Lightweight Performance**: Runs efficiently on modern mid-tier mobile processors (8GB+ RAM recommended)
+- **Lightweight Performance**: Runs efficiently on modern mid-tier mobile processors (16GB+ RAM recommended)
 - **Travel-Friendly**: Fully functional offline—perfect for flights, remote locations, and secure facilities
 - **Fast Setup**: Powered by Ollama API for streamlined deployment and rapid local inference
 - **Intelligent Retrieval**: Multiprocessing-enabled PDF chunking with semantic search capabilities
