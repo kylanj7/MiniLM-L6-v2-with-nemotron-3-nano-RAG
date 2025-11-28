@@ -200,7 +200,7 @@ Query: How do neural networks learn?
 Answer:
 Neural networks learn through a process called backpropagation...
 
-Sources: Neural-Networks-from-Scratch-in-Python-techprofree.pdf
+Sources: Neural-Networks-from-Scratch-in-Python.pdf
 ------------------------------------------------------------
 
 Your question: exit
