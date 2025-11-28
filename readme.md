@@ -426,21 +426,7 @@ Answer:"""
 
 ## License
 
-This software is proprietary and confidential. See `LICENSE` file for full terms.
-
-**Copyright (c) 2025 Kylan. All Rights Reserved.**
-
-Unauthorized copying, distribution, modification, or use is strictly prohibited without explicit written permission.
-
-For commercial licensing inquiries, contact: [your-email@example.com]
-
----
-
-## Support
-
-For issues, questions, or feature requests:
-- Open an issue on GitHub
-- Contact: [your-email@example.com]
+MIT License
 
 ---
 
