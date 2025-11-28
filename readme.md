@@ -1,5 +1,4 @@
-# Lightweight Enterprise RAG System
-
+# Lightweight Enterprise RAG
 A lightweight Retrieval-Augmented Generation (RAG) system designed for enterprise executives and employees who require powerful AI assistance for productivity tasks while maintaining strict data confidentiality.
 
 ## Overview
