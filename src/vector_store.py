@@ -7,6 +7,7 @@ from config.settings import VECTOR_STORE_DIR, COLLECTION_NAME
 import json
 from pathlib import Path
 import hashlib
+from tqdm import tqdm
 
 
 class VectorStoreManager:
@@ -70,7 +71,7 @@ class VectorStoreManager:
     
     def add_documents(self, chunks, source_file=None, batch_size=100):
         """
-        Add document chunks to vector store in batches.
+        Add document chunks to vector store in batches with progress bar.
         
         Args:
             chunks: List of LangChain Document objects
@@ -80,19 +81,22 @@ class VectorStoreManager:
         if not self.vector_store:
             self.create_or_load()
         
-        print(f"Adding {len(chunks)} chunks in batches of {batch_size}...")
+        total_batches = (len(chunks) - 1) // batch_size + 1
+        file_name = Path(source_file).name if source_file else "documents"
+        
+        print(f"\nIndexing {len(chunks)} chunks from {file_name}")
         
         all_ids = []
-        for i in range(0, len(chunks), batch_size):
-            batch = chunks[i:i + batch_size]
-            batch_num = i // batch_size + 1
-            total_batches = (len(chunks) - 1) // batch_size + 1
-            print(f"  Processing batch {batch_num}/{total_batches}")
-            
-            ids = self.vector_store.add_documents(batch)
-            all_ids.extend(ids)
+        with tqdm(total=len(chunks), desc="Adding chunks", unit="chunk") as pbar:
+            for i in range(0, len(chunks), batch_size):
+                batch = chunks[i:i + batch_size]
+                
+                ids = self.vector_store.add_documents(batch)
+                all_ids.extend(ids)
+                
+                pbar.update(len(batch))
         
-        print(f"✓ Added {len(all_ids)} chunks successfully")
+        print(f"✓ Successfully indexed {len(all_ids)} chunks\n")
         
         # Mark file as indexed if source provided
         if source_file:
