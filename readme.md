@@ -75,7 +75,7 @@ brew install ollama
 ```
 ```
 # Windows
-# Download and run installer from ollama.ai
+# Download and run installer from https://ollama.com/download
 ```
 
 ### Step 5: Start Ollama Service
