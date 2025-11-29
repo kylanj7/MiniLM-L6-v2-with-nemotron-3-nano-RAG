@@ -21,7 +21,7 @@ This system leverages **TinyLlama 1.1b** as the language model and **Embedded Ge
 
 ### Minimal Requirments
 - **Processor**: Modern dual-core CPU (Intel i5 11th gen or Ryzen zen3 or higher)
-- **RAM**: <16GB (32GB recommended for larger document collections)
+- **RAM**: >16GB (32GB recommended for larger document collections)
 - **Storage**: 256GB free space (2GB for models + extra for documents/vector store)
 - **OS**: Windows 10/11, macOS 12+, or Linux (Ubuntu 20.04+)
 
