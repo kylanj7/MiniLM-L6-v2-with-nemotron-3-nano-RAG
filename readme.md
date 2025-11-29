@@ -35,7 +35,7 @@ This system leverages **TinyLlama 1.1b** as the language model and **Embedded Ge
 
 ### Step 1: Clone the Repository
 ```bash
-git clone https://github.com/kylanj7/Lightweight-Enterprise-RAG.git```
+git clone https://github.com/kylanj7/Lightweight-Enterprise-RAG.git
 ```
 ## Change Directories
 ```
