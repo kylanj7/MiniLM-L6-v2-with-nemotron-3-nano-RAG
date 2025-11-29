@@ -68,10 +68,12 @@ Visit [https://ollama.ai](https://ollama.ai) and download Ollama for your operat
 ```bash
 # Linux
 curl -fsSL https://ollama.ai/install.sh | sh
-
+```
+```
 # macOS
 brew install ollama
-
+```
+```
 # Windows
 # Download and run installer from ollama.ai
 ```
