@@ -46,11 +46,13 @@ cd Lightweight-Enterprise-RAG
 ```bash
 # Create virtual environment
 python3 -m venv rag_venv
-
+```
+```
 # Activate virtual environment
 # On Linux/macOS:
 source rag_venv/bin/activate
-
+```
+```
 # On Windows:
 rag_venv\Scripts\activate
 ```
