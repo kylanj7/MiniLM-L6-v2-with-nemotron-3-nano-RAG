@@ -39,7 +39,7 @@ git clone https://github.com/kylanj7/Lightweight-Enterprise-RAG.git
 ```
 ## Change Directories
 ```
-cd lightweight-rag-enterprise
+cd Lightweight-Enterprise-RAG
 ```
 
 ### Step 2: Set Up Python Virtual Environment
