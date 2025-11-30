@@ -43,7 +43,7 @@ else
 fi
 echo "---"
 
-# --- Inline Check for MODEL_NOMIC ---
+# --- Inline Check for GEMMA_EMBED ---
 echo "Checking for model: $MODEL_GEMMA"
 if ollama list | grep -q "^$MODEL_GEMMA\s"; then
     echo "$MODEL_GEMMA is already installed."
