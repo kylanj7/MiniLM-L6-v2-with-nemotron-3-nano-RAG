@@ -50,7 +50,7 @@ chmod +x install.sh
 ./install.sh
 ```
 
-## If using Windows or Mac, or for Manual Set-up, Follow these Steps
+# If using Windows or Mac, or for Manual Set-up, Follow these Steps
 
 ### Step 1: Clone the Repository
 ```bash
