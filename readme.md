@@ -131,7 +131,7 @@ nomic-embed-text:latest abc456...       274 MB    1 minute ago
 
 ---
 
-## Usage Guide
+# Usage Guide
 
 ### Adding Documents
 
