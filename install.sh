@@ -1,10 +1,10 @@
 VENV_DIR="rag_env"
 PROGRAM_NAME="ollama"
 MODEL_TINYLLAMA="tinyllama:1.1b"
-MODEL_NOMIC="embeddinggemma:latest"
+MODEL_NOMIC="nomic-embed-text"
 
 sudo apt update
-sudo apt install python3.10-env
+sudo apt install python3.10-venv
 sudo apt install curl
 
 # ---Make Python env & install requirements---
@@ -25,33 +25,34 @@ else
     echo "Warning: requirements.txt file not found."
 fi
 
-# ---Function Definition for ---
-check_and_install_model() {
-    local model_name=$1
-    echo "Checking for model: $model_name"
-    
-    if ollama list | grep -q "^$model_name\s"; then
-        echo "$model_name is already installed."
-    else
-        echo "$model_name is not installed. Pulling now..."
-        ollama pull "$model_name"
-    fi
-    echo "---"
-}
-
-# ---Check for and Install Ollama executable---
+# ---Install ollama---
 if command -v "$PROGRAM_NAME" &>/dev/null; then
   echo "$PROGRAM_NAME is already installed."
 else
   echo "$PROGRAM_NAME is not installed. Running installation script..."
-  # Execute the installation command directly
-  curl -fsSL ollama.ai | sh
+  curl -fsSL https://ollama.ai/install.sh | sh
 fi
 
-# ---Check for and Install Models---
+# --- Inline Check for MODEL_TINYLLAMA ---
+echo "Checking for model: $MODEL_TINYLLAMA"
+if ollama list | grep -q "^$MODEL_TINYLLAMA\s"; then
+    echo "$MODEL_TINYLLAMA is already installed."
+else
+    echo "$MODEL_TINYLLAMA is not installed. Pulling now..."
+    ollama pull "$MODEL_TINYLLAMA"
+fi
+echo "---"
 
-check_and_install_model "$MODEL_TINYLLAMA"
-check_and_install_model "$MODEL_NOMIC"
-ollama list
+# --- Inline Check for MODEL_NOMIC ---
+echo "Checking for model: $MODEL_NOMIC"
+if ollama list | grep -q "^$MODEL_NOMIC\s"; then
+    echo "$MODEL_NOMIC is already installed."
+else
+    echo "$MODEL_NOMIC is not installed. Pulling now..."
+    ollama pull "$MODEL_NOMIC"
+fi
+echo "---"
 
 echo "INSTALLATION COMPLETE!"
+
+ollama list
