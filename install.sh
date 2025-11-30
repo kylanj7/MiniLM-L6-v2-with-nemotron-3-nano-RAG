@@ -1,7 +1,7 @@
 VENV_DIR="rag_env"
 PROGRAM_NAME="ollama"
-MODEL_TINYLLAMA="tinyllama:1.1b"
-MODEL_NOMIC="nomic-embed-text"
+MODEL_TINYLLAMA="tinyllama:latest"
+MODEL_NOMIC="embeddinggemma:latest"
 
 sudo apt update
 sudo apt install python3.10-venv
