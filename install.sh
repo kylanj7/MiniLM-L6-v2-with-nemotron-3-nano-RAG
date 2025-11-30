@@ -1,11 +1,10 @@
-  GNU nano 6.2                                                       install.sh *                                                               
 VENV_DIR="rag_env"
 PROGRAM_NAME="ollama"
 MODEL_TINYLLAMA="tinyllama:1.1b"
 MODEL_NOMIC="nomic-embed-text"
 
-
-sudo apt install python3.10-venv
+sudo apt update
+sudo apt install python3.10-env
 sudo apt install curl
 
 # ---Make Python env & install requirements---
@@ -54,4 +53,4 @@ fi
 check_and_install_model "$MODEL_TINYLLAMA"
 check_and_install_model "$MODEL_NOMIC"
 
-echo "Assuming there are no errors, INSTALLATION COMPLETE!"
+echo "INSTALLATION COMPLETE!"
