@@ -1,7 +1,7 @@
 VENV_DIR="rag_env"
 PROGRAM_NAME="ollama"
 MODEL_TINYLLAMA="tinyllama:latest"
-MODEL_NOMIC="embeddinggemma:latest"
+MODEL_GEMMA="embeddinggemma:latest"
 
 sudo apt update
 sudo apt install python3.10-venv
@@ -44,12 +44,12 @@ fi
 echo "---"
 
 # --- Inline Check for MODEL_NOMIC ---
-echo "Checking for model: $MODEL_NOMIC"
-if ollama list | grep -q "^$MODEL_NOMIC\s"; then
-    echo "$MODEL_NOMIC is already installed."
+echo "Checking for model: $MODEL_GEMMA"
+if ollama list | grep -q "^$MODEL_GEMMA\s"; then
+    echo "$MODEL_GEMMA is already installed."
 else
-    echo "$MODEL_NOMIC is not installed. Pulling now..."
-    ollama pull "$MODEL_NOMIC"
+    echo "$MODEL_GEMMA is not installed. Pulling now..."
+    ollama pull "$MODEL_GEMMA"
 fi
 echo "---"
 
