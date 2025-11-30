@@ -1,3 +1,5 @@
+### NEEDS DEBUGGING ###
+
 $VENV_DIR = "rag_env"
 $PROGRAM_NAME = "ollama"
 $MODEL_TINYLLAMA = "tinyllama:1.1b"
