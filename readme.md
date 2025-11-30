@@ -31,7 +31,26 @@ This system leverages **TinyLlama 1.1b** as the language model and **Embedded Ge
 
 ---
 
-## Installation Guide
+## For Auomatic installation (Linux Only) Follow these Simple steps Below
+
+### Step 1: Clone the Repository
+```bash
+git clone https://github.com/kylanj7/Lightweight-Enterprise-RAG.git
+```
+## Change Directories
+```
+cd Lightweight-Enterprise-RAG
+```
+## Make the Script Executable
+```
+chmod +x install.sh
+```
+## Run the Bash Script
+```
+./install.sh
+```
+
+## If using Windows or Mac, or for Manual Set-up, Follow these Steps
 
 ### Step 1: Clone the Repository
 ```bash
