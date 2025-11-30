@@ -18,8 +18,6 @@ fi
 echo "Activating virtual environment and installing requirements..."
 source "$VENV_DIR/bin/activate"
 
-pip install -r requirements.txt
-
 if [ -f "requirements.txt" ]; then
     pip install -r requirements.txt
     echo "Python requirements installed."
