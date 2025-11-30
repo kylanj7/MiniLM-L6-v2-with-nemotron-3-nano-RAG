@@ -31,7 +31,7 @@ This system leverages **TinyLlama 1.1b** as the language model and **Embedded Ge
 
 ---
 
-## For Auomatic installation (Linux Only) Follow these Simple steps Below
+## For Automatic Tnstallation (Linux Only) Follow the Steps Below
 
 ### Step 1: Clone the Repository
 ```bash
