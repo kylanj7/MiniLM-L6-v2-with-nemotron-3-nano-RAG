@@ -117,8 +117,8 @@ curl http://localhost:11434/api/tags
 # Pull the LLM model (TinyLlama 1.1b - ~637MB)
 ollama pull tinyllama:1.1b
 
-# Pull the embedding model (Nomic Embed Text - ~274MB)
-ollama pull nomic-embed-text
+# Pull the embedding model (embeddinggemma:latest - ~300MB)
+ollama pull embeddinggemma:latest
 
 # Verify models are installed
 ollama list
@@ -128,7 +128,7 @@ Expected output:
 ```
 NAME                    ID              SIZE      MODIFIED
 tinyllama:1.1b          xyz123...       637 MB    2 minutes ago
-nomic-embed-text:latest abc456...       274 MB    1 minute ago
+embeddinggemma:latest   abc456...       274 MB    1 minute ago
 ```
 
 ---
@@ -160,7 +160,7 @@ python3 main.py index --force
 **What happens during indexing:**
 - PDFs are processed in parallel using all CPU cores
 - Text is extracted and split into semantic chunks
-- Chunks are embedded using the Nomic model
+- Chunks are embedded using the Gemma Embedded model
 - Embeddings are stored in ChromaDB for fast retrieval
 - Progress is displayed in real-time
 
@@ -308,7 +308,7 @@ CHUNK_SIZE = 1000              # Characters per chunk
 CHUNK_OVERLAP = 200            # Overlap between chunks
 
 # Ollama models
-EMBEDDING_MODEL = "nomic-embed-text"
+EMBEDDING_MODEL = "embeddinggemma:latest"
 LLM_MODEL = "tinyllama:1.1b"
 OLLAMA_BASE_URL = "http://localhost:11434"
 
@@ -354,7 +354,7 @@ curl http://localhost:11434/api/tags
 ```bash
 # Pull the missing model
 ollama pull tinyllama:1.1b
-ollama pull nomic-embed-text
+ollama pull embeddinggemma:latest
 
 # Verify installation
 ollama list
