@@ -52,5 +52,6 @@ fi
 
 check_and_install_model "$MODEL_TINYLLAMA"
 check_and_install_model "$MODEL_NOMIC"
+ollama list
 
 echo "INSTALLATION COMPLETE!"
