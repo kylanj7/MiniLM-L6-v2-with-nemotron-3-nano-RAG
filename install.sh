@@ -4,6 +4,10 @@ PROGRAM_NAME="ollama"
 MODEL_TINYLLAMA="tinyllama:1.1b"
 MODEL_NOMIC="nomic-embed-text"
 
+
+sudo apt install python3.10-venv
+sudo apt install curl
+
 # ---Make Python env & install requirements---
 echo "Creating Python virtual environment..."
 if [ ! -d "$VENV_DIR" ]; then
