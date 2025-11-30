@@ -50,7 +50,7 @@ chmod +x install.sh
 ./install.sh
 ```
 ## Automatic Deployment
- - This method automatically updates your system, installs curl, pthon3.10-env, ollama and pulls the Tinyllama1.1b & GemmaEmbed300m models. 
+ - This method automatically updates your system, installs pthon3.10-env & activates the rag_env, installs curl, ollama, and pulls the Tinyllama1.1b & GemmaEmbed300m models. 
 
 # If using Windows or Mac, or for Manual Set-up, Follow these Steps
 
