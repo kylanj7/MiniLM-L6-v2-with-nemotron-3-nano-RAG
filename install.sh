@@ -1,4 +1,6 @@
 #!/bin/bash
+
+# --- Variable Assignments ---
 VENV_DIR="rag_env"
 PROGRAM_NAME="ollama"
 PACKAGE_CURL="curl" 
