@@ -2,8 +2,9 @@
 
 $VENV_DIR = "rag_env"
 $PROGRAM_NAME = "ollama"
-$MODEL_TINYLLAMA = "tinyllama:1.1b"
-$MODEL_NOMIC = "nomic-embed-text"
+$MODEL_TINYLLAMA = "tinyllama:latest"
+$MODEL_GEMMA = "embeddinggemma:latest"
+
 
 Write-Host "--- STEP 1: Make Python env & install requirements ---"
 Write-Host "Creating Python virtual environment..."
@@ -64,6 +65,6 @@ if (Get-Command $PROGRAM_NAME -ErrorAction SilentlyContinue) {
 
 # Check for and Install Models
 Check-AndInstall-Model $MODEL_TINYLLAMA
-Check-AndInstall-Model $MODEL_NOMIC
+Check-AndInstall-Model $MODEL_GEMMA
 
 Write-Host "Setup script finished."
