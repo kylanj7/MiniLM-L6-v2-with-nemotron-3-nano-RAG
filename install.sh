@@ -120,4 +120,4 @@ fi
 
 ollama list
 
-echo "****************INSTALLATION COMPLETE!****************
+echo "****************INSTALLATION COMPLETE!****************"
