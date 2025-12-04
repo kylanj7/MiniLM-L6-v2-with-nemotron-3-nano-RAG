@@ -118,13 +118,6 @@ else
     ollama pull "$MODEL_GEMMA"
 fi
 
-
-
-#
-if 
-echo "---"
-echo "****************INSTALLATION COMPLETE!****************"
-
-
-
 ollama list
+
+echo "****************INSTALLATION COMPLETE!****************
