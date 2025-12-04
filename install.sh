@@ -9,12 +9,8 @@ PACKAGE_VENV="python3.10-venv"
 MODEL_TINYLLAMA="tinyllama:latest"
 MODEL_GEMMA="embeddinggemma:latest"
 
-
-
 # --- System Update ---
 sudo apt update
-
-
 
 # --- Check and install pip ---
 echo "****************Installing Pip****************"
@@ -25,8 +21,6 @@ else
     sudo apt install -y "$PACKAGE_PIP"
 fi
 
-
-
 # --- Check and install curl ---
 echo "****************Installing Curl****************"
 if command -v curl &>/dev/null; then
@@ -36,8 +30,6 @@ else
     sudo apt install -y "$PACKAGE_CURL"
 fi
 
-
-
 # --- Check and install python3.10-venv ---
 echo "****************Installing Python3.10-venv****************"
 if dpkg -l | grep -q python3.10-venv; then
@@ -46,8 +38,6 @@ else
     echo "python3.10-venv is not installed. Installing now..."
     sudo apt install -y "$PACKAGE_VENV"
 fi
-
-
 
 # --- Make Python Environment ---
 echo "****************Creating the Python Virtual Environmant****************"
@@ -59,19 +49,13 @@ else
     echo "Virtual environment '$VENV_DIR' already exists."
 fi
 
-
-
 # --- Activate Virtual Environment ---
 echo "****************Activating the Python Virtual Envoronment****************"
 source "$VENV_DIR/bin/activate"
 
-
-
 # --- PyMuPDF dependency installation ---
 echo "****************Installing required system dependencies for PyMuPDF...****************"
 sudo apt install -y build-essential python3-dev libopenjp2-7 libpng16-16 libtiff5
-
-
 
 # --- Install Requirements ---
 echo "****************Installing the Requirments for the Virtual Environment****************"
@@ -82,8 +66,6 @@ else
     echo "requirements.txt file not found."
 fi
 
-
-
 # ---Install Ollama---
 echo "****************Installing Ollama****************"
 if command -v "$PROGRAM_NAME" &>/dev/null; then
@@ -92,8 +74,6 @@ else
   echo "$PROGRAM_NAME is not installed. Running installation script..."
   curl -fsSL https://ollama.ai/install.sh | sh
 fi
-
-
 
 # --- Inline Check for MODEL_TINYLLAMA ---
 echo "****************Pulling TinyLlama1.1b****************"
@@ -105,8 +85,6 @@ else
     ollama pull "$MODEL_TINYLLAMA"
 fi
 echo "---"
-
-
 
 # --- Inline Check for GEMMA_EMBED ---
 echo "****************Pulling Gemma Embedded 300m Model****************"
