@@ -6,6 +6,7 @@ PROGRAM_NAME="ollama"
 PACKAGE_CURL="curl" 
 PACKAGE_PIP="python3-pip"
 PACKAGE_VENV="python3.10-venv"
+OLLAMA_URL="https://ollama.ai/install.sh | sh"
 MODEL_TINYLLAMA="tinyllama:latest"
 MODEL_GEMMA="embeddinggemma:latest"
 
@@ -72,7 +73,7 @@ if command -v "$PROGRAM_NAME" &>/dev/null; then
   echo "$PROGRAM_NAME is already installed."
 else
   echo "$PROGRAM_NAME is not installed. Running installation script..."
-  curl -fsSL https://ollama.ai/install.sh | sh
+  curl -fsSL $OLLAMA_URL
 fi
 
 # --- Inline Check for MODEL_TINYLLAMA ---
