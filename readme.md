@@ -72,7 +72,7 @@ cd Lightweight-Enterprise-RAG
 ```
 ./install.ps1
 ```
- - This method installs Ollama, updates the path, installs pip, installed project dependancies, activates the Virtual Environment and pulls TinLlama & GemmaEmbedding models.
+ - This method installs Ollama, updates the path, installs pip, installs project dependancies, activates the Virtual Environment and pulls TinLlama1.1b & GemmaEmbedding300m models.
 
 # Follow the Steps Below for Manual Set-up
 
