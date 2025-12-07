@@ -120,7 +120,7 @@ brew install ollama
 ```
 ```
 # Windows
-# Download and run installer from https://ollama.com/download
+winget install --id Git.Git -e --source winget
 ```
 
 ### Step 5: Start Ollama Service
