@@ -14,7 +14,6 @@ if ($PROGRAM) {
     
     if ($LASTEXITCODE -eq 0) {
         Write-Host "Ollama installed successfully!" -ForegroundColor Green
-        # Refresh PATH after installation
         Write-Host "Refreshing PATH..." -ForegroundColor Yellow
         $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
     } else {
