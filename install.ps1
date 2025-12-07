@@ -56,7 +56,7 @@ if (Get-Command pip -ErrorAction SilentlyContinue) {
 } else {
     Write-Host "pip not found. Installing pip..." -ForegroundColor Yellow
     $pipInstaller = "$env:TEMP\get-pip.py"
-    wget https://bootstrap.pypa.io/get-pip.py -OutFile $pipInstaller
+    Invoke-WebRequest -Uri https://bootstrap.pypa.io/get-pip.py -OutFile $pipInstaller
     python $pipInstaller
     if (Get-Command pip -ErrorAction SilentlyContinue) {
         Write-Host "pip installed successfully!" -ForegroundColor Green
