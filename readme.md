@@ -31,11 +31,13 @@ This system leverages **TinyLlama 1.1b** as the language model and **Embedded Ge
 
 ---
 
-## For Automatic Tnstallation (Linux Only) Follow the Steps Below
+## For Automatic Tnstallation Follow the Steps Below
+
+ - This method automatically updates your system(Linux), installs pthon3.10-env & activates the rag_env, installs curl(Linux), ollama, and pulls the Tinyllama1.1b & GemmaEmbed300m models. 
 
 ### Step 1: Clone the Repository
 ```bash
-git clone https://github.com/kylanj7/Lightweight-Enterprise-RAG.git
+git clone https://github.com/kylanj7/Lightweight-Enterprise-RAG
 ```
 ## Change Directories
 ```
@@ -52,6 +54,24 @@ source install.sh # Run as source to activate the venv
 ## Automatic Deployment
  - This method automatically updates your system, installs pthon3.10-env & activates the rag_env, installs curl, ollama, and pulls the Tinyllama1.1b & GemmaEmbed300m models. 
 
+## For Automatic Windows Installation
+
+### Install Git
+```bash
+winget install --id Git.Git -e --source winget
+```
+### Clone the Repository
+```bash
+git clone https://github.com/kylanj7/Lightweight-Enterprise-RAG
+```
+## Change Directories
+```
+cd Lightweight-Enterprise-RAG
+```
+## Run the PowerShell Script
+```
+./install.ps1
+```
 # If using Windows or Mac, or for Manual Set-up, Follow these Steps
 
 ### Step 1: Clone the Repository
