@@ -52,7 +52,7 @@ chmod +x install.sh
 source install.sh # Run as source to activate the venv
 ```
 ## Automatic Deployment
- - This method automatically updates your system, installs pthon3.10-env & activates the rag_env, installs curl, ollama, and pulls the Tinyllama1.1b & GemmaEmbed300m models. 
+ - This method automatically updates your system, installs project dependencies (requirements.txt), installs pthon3.10-env & activates the rag_env, installs curl, ollama, and pulls the Tinyllama1.1b & GemmaEmbed300m models. 
 
 ## For Automatic Windows Installation
 
@@ -72,7 +72,7 @@ cd Lightweight-Enterprise-RAG
 ```
 ./install.ps1
 ```
- - This method installs Ollama, updates the path, installs pip, installs project dependancies, activates the Virtual Environment and pulls TinLlama1.1b & GemmaEmbedding300m models.
+ - This method installs Ollama, updates the path, installs pip, installs project dependencies (requirements.txt), activates the Virtual Environment and pulls TinLlama1.1b & GemmaEmbedding300m models.
 
 # Follow the Steps Below for Manual Set-up
 
