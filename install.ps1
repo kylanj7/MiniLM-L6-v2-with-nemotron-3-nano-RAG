@@ -14,13 +14,18 @@ if ($PROGRAM) {
     
     if ($LASTEXITCODE -eq 0) {
         Write-Host "Ollama installed successfully!" -ForegroundColor Green
+        # Refresh PATH after installation
+        Write-Host "Refreshing PATH..." -ForegroundColor Yellow
+        $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
     } else {
         Write-Host "Installation failed" -ForegroundColor Red
+        exit 1
     }
 }
 
 ### CHECK FOR LLM
-$modelCheck = ollama list | Select-String "tinyllama"
+Start-Sleep -Seconds 2
+$modelCheck = ollama list 2>$null | Select-String "tinyllama"
 if ($modelCheck) {
     Write-Host "TinyLlama is already installed" -ForegroundColor Blue
 } else {
@@ -56,7 +61,7 @@ if (Get-Command pip -ErrorAction SilentlyContinue) {
 } else {
     Write-Host "pip not found. Installing pip..." -ForegroundColor Yellow
     $pipInstaller = "$env:TEMP\get-pip.py"
-    Invoke-WebRequest -Uri https://bootstrap.pypa.io/get-pip.py -OutFile $pipInstaller
+    wget https://bootstrap.pypa.io/get-pip.py -OutFile $pipInstaller
     python $pipInstaller
     if (Get-Command pip -ErrorAction SilentlyContinue) {
         Write-Host "pip installed successfully!" -ForegroundColor Green
