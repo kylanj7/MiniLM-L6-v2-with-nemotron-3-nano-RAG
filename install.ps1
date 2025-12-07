@@ -1,9 +1,9 @@
 Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process -Force
 $PROGRAM = Get-Command ollama -ErrorAction SilentlyContinue
 $PIP_INSTALL = "$env:TEMP\get-pip.py"
-$PACKAGE_ENV = service_agent_wrag_env
-$MODEL_LLM = tinyllama:latest
-$MODEL_EMBEDDING = embeddinggemma:latest
+$PACKAGE_ENV = "service_agent_wrag_env"
+$MODEL_LLM = "tinyllama:latest"
+$MODEL_EMBEDDING = "embeddinggemma:latest"
 
 ### INSTALL OLLAMA 
 if ($PROGRAM) {
