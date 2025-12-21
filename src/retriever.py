@@ -1,11 +1,11 @@
 """
 RAG retriever: combines vector search with LLM generation
 """
-from langchain_ollama import OllamaLLM
+from langchain_community.llms import VLLM
 from src.vector_store import VectorStoreManager
 from config.settings import (
     LLM_MODEL, TOP_K_RESULTS, MAX_TOKENS, 
-    TEMPERATURE, OLLAMA_BASE_URL
+    TEMPERATURE
 )
 
 
@@ -16,11 +16,11 @@ class RAGRetriever:
         self.vs_manager = VectorStoreManager()
         self.vs_manager.create_or_load()
         
-        self.llm = OllamaLLM(
-            model=LLM_MODEL,
-            base_url=OLLAMA_BASE_URL,
-            temperature=TEMPERATURE,
-            num_predict=MAX_TOKENS
+        self.llm = VLLM(model=LLM_MODEL, 
+            trust_remote_code=True, 
+            max_new_tokens=MAX_TOKENS, 
+            temperature=TEMPERATURE, 
+            tensor_parallel_size=2
         )
         
         print(f"✓ RAG Retriever initialized with {LLM_MODEL}")

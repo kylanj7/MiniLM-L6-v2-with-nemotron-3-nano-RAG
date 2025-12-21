@@ -1,8 +1,8 @@
 """
 Ollama embeddings interface for semantic search
 """
-from langchain_ollama import OllamaEmbeddings
-from config.settings import EMBEDDING_MODEL, OLLAMA_BASE_URL
+from langchain_huggingface import HuggingFaceEmbeddings
+from config.settings import EMBEDDING_MODEL
 
 
 def get_embeddings():
@@ -12,10 +12,8 @@ def get_embeddings():
     Returns:
         OllamaEmbeddings: Configured embedding function
     """
-    return OllamaEmbeddings(
-        model=EMBEDDING_MODEL,
-        base_url=OLLAMA_BASE_URL
-    )
+    return HuggingFaceEmbeddings(model_name=EMBEDDING_MODEL)
+    
 
 
 if __name__ == "__main__":

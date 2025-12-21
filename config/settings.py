@@ -18,9 +18,8 @@ CHUNK_SIZE = 1000
 CHUNK_OVERLAP = 200
 
 # Ollama models
-EMBEDDING_MODEL = "embeddinggemma:latest"
-LLM_MODEL = "tinyllama:1.1b"
-OLLAMA_BASE_URL = "http://localhost:11434"
+EMBEDDING_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
+LLM_MODEL = "microsoft/Phi-3.5-mini-instruct"
 
 # Vector store settings
 COLLECTION_NAME = "enterprise_docs"

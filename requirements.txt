@@ -1,7 +1,10 @@
 langchain
-langchain-ollama
+sentence-transformers
+langchain-huggingface
+langchain-community
 langchain-chroma
 langchain-text-splitters
 pypdf
 chromadb
 PyMuPDF
+vllm
