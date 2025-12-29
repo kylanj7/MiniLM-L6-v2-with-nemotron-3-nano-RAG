@@ -1,14 +1,15 @@
-# Huggingface RAG System with vLLM
+# MiniLM-L6-v2 with Nemotron-3-nano RAG
 
-Retrieval-Augmented Generation (RAG) system for enterprise document question-answering. Built with ChromaDB, vLLM, and HuggingFace embeddings for efficient local deployment.
+Enterprise document question-answering system combining MiniLM-L6-v2 embeddings with Nemotron-3-nano via Ollama. Features a clean Streamlit interface, parallel PDF processing, and incremental indexing.
 
 ## Features
 
+- **Streamlit Web Interface**: Clean, interactive chat interface with source citation
 - **Parallel PDF Processing**: Multi-core PDF extraction and chunking with PyMuPDF
 - **Incremental Indexing**: Smart file tracking to avoid re-indexing unchanged documents
-- **Local Inference**: Uses vLLM for fast local LLM inference with tensor parallelism
-- **Semantic Search**: ChromaDB vector store with MiniLM embeddings
-- **Modular Architecture**: Clean separation of concerns across chunking, embedding, storage, and retrieval
+- **Local Inference**: Uses Ollama for fast local LLM inference with Nemotron-3-nano
+- **Semantic Search**: ChromaDB vector store with MiniLM-L6-v2 embeddings
+- **Source Attribution**: Automatic citation of source documents in responses
 
 ## System Architecture
 
@@ -26,7 +27,7 @@ Retrieval-Augmented Generation (RAG) system for enterprise document question-ans
        │
        ▼
 ┌─────────────────┐
-│  embeddings     │  ← HuggingFace MiniLM-L6-v2
+│  embeddings     │  ← MiniLM-L6-v2 via sentence-transformers
 └──────┬──────────┘
        │
        ▼
@@ -37,44 +38,57 @@ Retrieval-Augmented Generation (RAG) system for enterprise document question-ans
        │
        ▼
 ┌─────────────────┐
-│   retriever     │  ← vLLM (Phi-3.5-mini) + RAG pipeline
+│   retriever     │  ← Ollama (Nemotron-3-nano) + RAG pipeline
+└──────┬──────────┘
+       │
+       ▼
+┌─────────────────┐
+│ Streamlit UI    │  ← Web interface with chat + sources
 └─────────────────┘
 ```
 
 ## Prerequisites
 
-- Python 3.10
-- CUDA-capable GPU (recommended for vLLM)
+- **Python 3.10+**
+- **Ollama** installed and running
+- **CUDA-capable GPU** (recommended for 2x RTX 3090 setup)
 
 ## Installation
 
-1. Clone the repository:
+### 1. Clone the repository
 ```bash
-git clone https://github.com/kylanj7/Huggingface-vLLM-RAG
-cd Huggingface-vLLM-RAG
+git clone https://github.com/kylanj7/MiniLM-L6-v2-with-nemotron-3-nano-RAG
+cd MiniLM-L6-v2-with-nemotron-3-nano-RAG
 ```
 
-2. Create Virtual Environment 
+### 2. Set up Python environment
 ```bash
-conda create -n myrag python=3.10
-conda activate myrag
+conda create -n nemotron-rag python=3.10
+conda activate nemotron-rag
 pip install -r requirements.txt
 ```
 
-3. Install dependencies:
+### 3. Install and configure Ollama
 ```bash
-pip install -r requirements.txt
+# Install Ollama (Linux/macOS)
+curl -fsSL https://ollama.ai/install.sh | sh
+
+# Pull Nemotron-3-nano model
+ollama pull nemotron-3-nano:latest
+
+# Verify Ollama is running
+curl http://127.0.0.1:11434/api/tags
 ```
 
-4. Verify installation:
+### 4. Verify installation
 ```bash
 python src/embeddings.py  # Test embeddings
+python src/retriever.py   # Test RAG pipeline
 ```
 
 ## Quick Start
 
 ### 1. Add Your Documents
-
 Place PDF files in the `data/pdfs/` directory:
 ```bash
 mkdir -p data/pdfs
@@ -82,28 +96,27 @@ cp your-documents/*.pdf data/pdfs/
 ```
 
 ### 2. Index Documents
-
 Index your documents into the vector database:
 ```bash
 # Index new or modified PDFs only (recommended)
-python3 main.py index
+python main.py index
 
 # Force re-index all PDFs (slower, use if needed)
-python3 main.py index --force
+python main.py index --force
 ```
 
-This will:
-- Extract text from all PDFs in parallel
-- Chunk documents into 1000-character segments (200 char overlap)
-- Generate embeddings and store in ChromaDB
-
-### 3. Query the System
-
-## Querying the System
-
-Start an interactive query session:
+### 3. Launch Web Interface
+Start the Streamlit application:
 ```bash
-python3 main.py query
+streamlit run app.py
+```
+
+Navigate to `http://localhost:8501` to access the chat interface.
+
+### 4. Alternative: Command Line Interface
+For command-line usage:
+```bash
+python main.py query
 ```
 
 ## Configuration
@@ -112,15 +125,23 @@ Edit `config/settings.py` to customize:
 
 | Parameter | Default | Description |
 |-----------|---------|-------------|
+| `EMBEDDING_MODEL` | `sentence-transformers/all-MiniLM-L6-v2` | HuggingFace embedding model |
+| `LLM_MODEL` | `nemotron-3-nano:latest` | Ollama model name |
+| `OLLAMA_BASE_URL` | `http://127.0.0.1:11434` | Ollama server endpoint |
 | `CHUNK_SIZE` | 1000 | Characters per document chunk |
 | `CHUNK_OVERLAP` | 200 | Overlap between chunks |
-| `EMBEDDING_MODEL` | `all-MiniLM-L6-v2` | HuggingFace embedding model |
-| `LLM_MODEL` | `Phi-3.5-mini-instruct` | vLLM generation model |
-| `TOP_K_RESULTS` | 3 | Number of chunks to retrieve |
+| `TOP_K_RESULTS` | 1 | Number of chunks to retrieve |
 | `MAX_TOKENS` | 2048 | Maximum generation length |
-| `TEMPERATURE` | 0.49 | LLM sampling temperature |
+| `TEMPERATURE` | 0.7 | LLM sampling temperature |
+| `NUMBER_OF_GPUs` | 2 | GPU configuration for Ollama |
 
 ## Module Overview
+
+### `app.py`
+- Streamlit web interface with chat functionality
+- Real-time model loading with caching
+- Source citation display with expandable sections
+- Clean chat history management
 
 ### `src/pdf_chunker.py`
 - Parallel PDF text extraction using PyMuPDF
@@ -130,7 +151,7 @@ Edit `config/settings.py` to customize:
 
 ### `src/embeddings.py`
 - HuggingFace `sentence-transformers` integration
-- Configurable embedding model selection
+- MiniLM-L6-v2 embedding generation
 - Standalone testing capability
 
 ### `src/vector_store.py`
@@ -140,32 +161,31 @@ Edit `config/settings.py` to customize:
 - Batch document insertion with progress tracking
 
 ### `src/retriever.py`
-- vLLM-powered generation with tensor parallelism
+- Ollama integration for Nemotron-3-nano
 - Context-aware prompt construction
-- Semantic similarity search
-- Source citation tracking
+- Semantic similarity search with ChromaDB
+- Source citation tracking and response formatting
 
 ## Performance Considerations
 
-### GPU Memory
-vLLM uses tensor parallelism (`tensor_parallel_size=2`) for multi-GPU setups. Adjust based on your hardware:
-```python
-# In retriever.py
-self.llm = VLLM(
-    model=LLM_MODEL,
-    tensor_parallel_size=1,  # Use 1 for single GPU
-    ...
-)
+### Ollama Configuration
+Configure Ollama for your hardware setup:
+```bash
+# Set GPU memory allocation (optional)
+export OLLAMA_GPU_LAYERS=32
+export OLLAMA_NUM_PARALLEL=2
+
+# For dual RTX 3090 setup
+export OLLAMA_GPU_MEMORY="20GB,20GB"
 ```
 
-### Batch Processing
-Vector store indexing uses batches of 100 chunks. Increase for faster indexing on high-memory systems:
-```python
-vs_manager.add_documents(chunks, batch_size=500)
-```
+### Memory Usage
+- **MiniLM-L6-v2**: ~22MB RAM for embeddings
+- **Nemotron-3-nano**: ~2GB VRAM via Ollama
+- **ChromaDB**: Scales with document corpus size
 
-### CPU Cores
-PDF processing uses all available CPU cores by default. Limit if needed:
+### CPU Optimization
+PDF processing uses all available CPU cores. Limit if needed:
 ```python
 # In pdf_chunker.py
 max_workers = 4  # Instead of multiprocessing.cpu_count()
@@ -176,56 +196,69 @@ max_workers = 4  # Instead of multiprocessing.cpu_count()
 The system automatically tracks indexed files. To add new documents:
 
 1. Add PDFs to `data/pdfs/`
-2. Re-run chunker - only new/modified files will be processed
+2. Re-run indexing - only new/modified files will be processed
 3. New chunks are appended to existing vector store
 
-To force re-indexing:
-```python
-vs_manager = VectorStoreManager()
-vs_manager.delete_collection()  # Clears everything
+To force re-indexing everything:
+```bash
+rm -rf vectorstore/chroma_db
+python main.py index
 ```
 
 ## Troubleshooting
 
-### vLLM Import Errors
+### Ollama Connection Issues
 ```bash
-# Ensure CUDA is available
-python -c "import torch; print(torch.cuda.is_available())"
+# Check if Ollama is running
+curl http://127.0.0.1:11434/api/tags
 
-# Reinstall vLLM with CUDA support
-pip install vllm --extra-index-url https://download.pytorch.org/whl/cu118
+# Restart Ollama service
+ollama serve
+
+# Verify model is available
+ollama list
 ```
 
-### Out of Memory
-Reduce batch size or use smaller models:
-```python
-# Smaller embedding model
-EMBEDDING_MODEL = "sentence-transformers/all-MiniLM-L12-v2"
+### Streamlit Issues
+```bash
+# Clear Streamlit cache
+streamlit cache clear
 
-# Smaller LLM
-LLM_MODEL = "microsoft/phi-2"
+# Run with specific port
+streamlit run app.py --server.port 8502
 ```
 
 ### ChromaDB Persistence Issues
 ```bash
-# Clear and rebuild
+# Clear and rebuild vector store
 rm -rf vectorstore/chroma_db
 python src/pdf_chunker.py
+```
+
+### GPU Memory Issues
+Reduce batch size or use CPU-only mode:
+```python
+# In config/settings.py
+NUMBER_OF_GPUs = 0  # Force CPU mode
+MEMORY_UTILIZATION = 0.6  # Reduce memory usage
 ```
 
 ## Project Structure
 
 ```
 .
+├── app.py                   # Streamlit web interface
+├── main.py                  # Command-line interface
 ├── config/
 │   └── settings.py          # Configuration parameters
 ├── data/
 │   └── pdfs/                # Input PDF directory
+├── models/                  # Local model storage (Nemotron-3-nano)
 ├── src/
 │   ├── pdf_chunker.py       # PDF processing
-│   ├── embeddings.py        # Embedding interface
+│   ├── embeddings.py        # MiniLM-L6-v2 embeddings
 │   ├── vector_store.py      # ChromaDB management
-│   └── retriever.py         # RAG pipeline
+│   └── retriever.py         # RAG pipeline with Ollama
 ├── vectorstore/
 │   └── chroma_db/           # Persisted vector database
 ├── requirements.txt
@@ -235,13 +268,26 @@ python src/pdf_chunker.py
 ## Dependencies
 
 Core libraries:
-- `langchain` - RAG framework
-- `langchain-chroma` - ChromaDB integration
+- `streamlit` - Web interface framework
+- `langchain` - RAG framework and document processing
+- `langchain-ollama` - Ollama LLM integration
+- `langchain-chroma` - ChromaDB vector store
 - `langchain-huggingface` - HuggingFace embeddings
-- `vllm` - Fast LLM inference engine
+- `sentence-transformers` - MiniLM-L6-v2 embedding model
 - `PyMuPDF` - PDF text extraction
 - `chromadb` - Vector database
-- `sentence-transformers` - Embedding models
+
+## Model Details
+
+- **Embedding Model**: `sentence-transformers/all-MiniLM-L6-v2`
+  - 384-dimensional embeddings
+  - Optimized for semantic similarity
+  - Fast inference on CPU/GPU
+
+- **Language Model**: `nemotron-3-nano:latest`
+  - NVIDIA's efficient small language model
+  - Runs locally via Ollama
+  - Optimized for dual RTX 3090 setup
 
 ## License
 
@@ -253,6 +299,7 @@ Contributions welcome! Please submit pull requests or open issues for bugs and f
 
 ## Acknowledgments
 
-- Built with [vLLM](https://github.com/vllm-project/vllm) for efficient inference
-- Powered by [ChromaDB](https://www.trychroma.com/) vector database
-- Uses HuggingFace [sentence-transformers](https://www.sbert.net/)
+- Built with [Ollama](https://ollama.ai/) for local LLM inference
+- Powered by [ChromaDB](https://www.trychroma.com/) vector database  
+- Uses HuggingFace [sentence-transformers](https://www.sbert.net/) for embeddings
+- NVIDIA [Nemotron-3-nano](https://ollama.ai/library/nemotron-mini) for generation
