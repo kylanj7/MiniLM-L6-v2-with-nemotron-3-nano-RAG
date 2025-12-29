@@ -1,5 +1,6 @@
 langchain
 sentence-transformers
+langchain-ollama
 langchain-huggingface
 langchain-community
 langchain-chroma

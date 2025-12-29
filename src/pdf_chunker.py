@@ -72,7 +72,6 @@ def process_pdfs_in_directory_parallel(directory_path, chunk_size=1000, chunk_ov
 
     return all_chunks
 
-
 if __name__ == "__main__":
     # Test standalone with config
     from config.settings import DATA_DIR, CHUNK_SIZE, CHUNK_OVERLAP

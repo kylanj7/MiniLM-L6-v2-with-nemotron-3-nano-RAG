@@ -1,11 +1,11 @@
 """
 RAG retriever: combines vector search with LLM generation
 """
-from langchain_community.llms import VLLM
+from langchain_ollama import OllamaLLM
 from src.vector_store import VectorStoreManager
 from config.settings import (
     LLM_MODEL, TOP_K_RESULTS, MAX_TOKENS, 
-    TEMPERATURE
+    TEMPERATURE, OLLAMA_BASE_URL
 )
 
 
@@ -16,11 +16,11 @@ class RAGRetriever:
         self.vs_manager = VectorStoreManager()
         self.vs_manager.create_or_load()
         
-        self.llm = VLLM(model=LLM_MODEL, 
-            trust_remote_code=True, 
-            max_new_tokens=MAX_TOKENS, 
-            temperature=TEMPERATURE, 
-            tensor_parallel_size=2
+        self.llm = OllamaLLM(
+            model=LLM_MODEL,
+            base_url=OLLAMA_BASE_URL,
+            temperature=TEMPERATURE,
+            num_predict=MAX_TOKENS
         )
         
         print(f"✓ RAG Retriever initialized with {LLM_MODEL}")
@@ -55,8 +55,16 @@ class RAGRetriever:
         ])
         
         # Construct prompt
-        prompt = f"""Use the following context to answer the question. Be concise and accurate. If you cannot answer based on the context provided, say so clearly.
+        prompt = f"""You are a technical documentation expert. Using the context provided below, give a comprehensive and detailed answer to the question.
 
+Instructions:
+- Provide a thorough explanation with relevant details
+- Include specific examples or technical specifications when available
+- Structure your response with clear paragraphs
+- Aim for 3-5 paragraphs when the context supports it
+- If multiple aspects exist, address each one
+- Use technical terminology appropriately
+- If context is insufficient, explain what information is missing
 Context:
 {context}
 

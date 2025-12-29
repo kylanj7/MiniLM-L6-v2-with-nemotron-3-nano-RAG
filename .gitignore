@@ -1,35 +1,85 @@
-# Python
-__pycache__/
-*.py[cod]
-*.so
-*.egg-info/
-dist/
-build/
-
-# Virtual Environment
-rag_venv/
-venv/
-env/
-
-# Vector Database
-vectorstore/
+# RAG Project .gitignore
 
 # Data files
-data/pdfs/*.pdf
-chunks_output.txt
+*.pdf
+*.PDF
 
-# Logs
+# Model files and weights
+*.bin
+*.safetensors
+*.pt
+*.pth
+*.ckpt
+*.h5
+*.pkl
+*.pickle
+
+# Configuration and data files
+*.json
+*.txt
+*.sqlite3
+*.db
+*.sqlite
+
+# Template files
+*.jinja
+*.jinja2
+
+# Model directories (common ML model folder names)
+models/
+weights/
+checkpoints/
+data/
+datasets/
+embeddings/
+vectors/
+index/
+faiss_index/
+
+# Hugging Face cache
+.cache/
+huggingface_hub/
+transformers_cache/
+
+# Vector database files
+*.faiss
+*.index
+chroma_db/
+pinecone_cache/
+
+# Large files and archives
+*.zip
+*.tar.gz
+*.rar
+*.7z
+
+# Environment and IDE files
+.env
+.venv/
+venv/
+env/
+.idea/
+.vscode/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Jupyter notebook checkpoints
+.ipynb_checkpoints/
+
+# Log files
 *.log
+logs/
 
-# OS
+# Temporary files
+*.tmp
+*.temp
 .DS_Store
 Thumbs.db
 
-# IDE
-.vscode/
-.idea/
-*.swp
-*.swo
-
-# Environment variables
-.env
+# API keys and secrets (common names)
+secrets.py
+config_local.py
+api_keys.txt
+credentials.json

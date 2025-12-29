@@ -9,6 +9,7 @@ from src.vector_store import VectorStoreManager
 from src.retriever import RAGRetriever
 from config.settings import DATA_DIR, CHUNK_SIZE, CHUNK_OVERLAP
 
+os.environ['CUDA_DEVICE_ORDER'] = 'PCI_BUS_ID' # Forces GPU assignment according to their physicalhardware arrangement. 
 
 def index_documents(force_reindex=False):
     """Index new/changed PDFs only (unless force_reindex=True)."""
@@ -76,22 +77,28 @@ def query_system():
     
     rag = RAGRetriever()
     
-    while True:
-        query = input("\nYour question: ").strip()
-        
-        if query.lower() in ['exit', 'quit', 'q']:
-            print("\nGoodbye!")
-            break
-        
-        if not query:
-            continue
-        
-        result = rag.retrieve_and_generate(query)
-        
-        print(f"\nAnswer:\n{result['answer']}")
-        print(f"\nSources: {', '.join(result['sources'])}")
-        print("-" * 60)
-
+    try:
+        while True:
+            query = input("\nYour question: ").strip()
+            
+            if query.lower() in ['exit', 'quit', 'q']:
+                print("\nGoodbye!")
+                break
+            
+            if not query:
+                continue
+            
+            result = rag.retrieve_and_generate(query)
+            
+            print(f"\nAnswer:\n{result['answer']}")
+            print(f"\nSources: {', '.join(result['sources'])}")
+            print("-" * 60)
+    
+    finally:
+        # Ensure cleanup even if interrupted (Ctrl+C)
+        if hasattr(rag, 'llm'):
+            del rag.llm
+        del rag
 
 def show_stats():
     """Show vector store statistics."""
